@@ -1,5 +1,5 @@
 export const urls = {
-  battle: {
-    get: '/',
-  },
+	battle: {
+		get: '/'
+	}
 };

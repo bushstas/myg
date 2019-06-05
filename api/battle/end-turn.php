@@ -1,20 +1,18 @@
 <?php
 
+include '../init.php';
 include __DIR__.'/../_classes/battle-actions.php';
 
-$userId = 'skfjrfhry3wgfdy43r7d';
-$file = __DIR__.'/../_users/'.$userId.'/battle.php';
-$battle = json_decode(file_get_contents($file), true);
-extract($battle);
-
+Auth::init();
+$battle = Saver::get('battle');
 
 BattleActions::init($heroes);
-foreach ($groups as $groupId => $ids) {
+foreach ($battle['groups'] as $groupId => $ids) {
 	foreach ($ids as $id) {
-		$actor = $enemies[$id];
+		$actor = &$battle['enemies'][$id];
 		BattleActions::initActor($id, $actor);
 		if ($actor['leader'] && $turn === 0) {
-			BattleActions::initLeader($leaders[$groupId]);
+			BattleActions::initLeader($battle['leaders'][$groupId]);
 			BattleActions::command();
 			continue;
 		}
@@ -30,6 +28,6 @@ foreach ($groups as $groupId => $ids) {
 // 	array('id' => 'hero', 'props' => array('dmgKey' => 1, 'dmg' => 10)),
 // 	array('id' => 'a', 'props' => array('dmgKey' => 2, 'dmg' => 10), 'duration' => 10),
 // )
-
-die(json_encode(array('data' => BattleActions::get())));
+print_r($battle);
+//die(json_encode(array('data' => BattleActions::get())));
 

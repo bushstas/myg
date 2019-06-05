@@ -1,13 +1,13 @@
 import { CommonService } from './common';
 
 export class BattleService extends CommonService {
-  name = 'battle';
+    name = 'battle';
 
-  get = () => {
-    return this.fetch('get');
-  };
+    get = () => {
+        return this.fetch('get');
+    }
 
-  endTurn = () => {
-    return this.fetch('end-turn');
-  };
+    endTurn = () => {
+        return this.fetch('end-turn');
+    }
 }

@@ -8,26 +8,26 @@ const actions = new BattleActions();
 const stored = ['battle'];
 
 export class Battle extends React.PureComponent {
-  static displayName = 'Battle';
+	static displayName = 'Battle';
+	
+    componentDidMount() {
+        actions.load();
+    }
 
-  componentDidMount() {
-    actions.load();
-  }
+    handleEndTurn = () => {
+        actions.endTurn();
+    }
 
-  handleEndTurn = () => {
-    actions.endTurn();
-  };
-
-  render() {
-    return (
-      <div className={css.main}>
-        <StoreContainer
-          component={BattleField}
-          stored={stored}
-          onEndTurn={this.handleEndTurn}
-          flatten
-        />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className={css.main}>
+            	<StoreContainer
+            		component={BattleField}
+            		stored={stored}
+                    onEndTurn={this.handleEndTurn}
+                    flatten
+            	/>
+            </div>
+       	);
+    }
 }

@@ -23,9 +23,9 @@ class BattleActions {
 		self::$actions = array();
 	}
 
-	static function initActor($actorId, $actor) {
+	static function initActor($actorId, &$actor) {
 		self::$actorId = $actorId;
-		self::$actor = $actor;
+		self::$actor = &$actor;
 		self::$creature = getCreature($actor);
 	}
 
