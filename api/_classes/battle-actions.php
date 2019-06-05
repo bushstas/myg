@@ -1,7 +1,6 @@
 <?php
 
 include __DIR__.'/random-generator.php';
-include __DIR__.'/utils.php';
 include __DIR__.'/../_data/battle-cries.php';
 
 class BattleActions {
@@ -39,6 +38,15 @@ class BattleActions {
 		}
 		$action = array('id' => self::$actorId, 'props' => $props, 'duration' => $duration);
 		array_push(self::$actions, $action);
+		if (!empty($props['x'])) {
+			self::$actor['x'] = $props['x'];
+		}
+		if (!empty($props['y'])) {
+			self::$actor['y'] = $props['y'];
+		}
+		if (!empty($props['dir'])) {
+			self::$actor['dir'] = $props['dir'];
+		}
 	}
 
 	static function command() {
