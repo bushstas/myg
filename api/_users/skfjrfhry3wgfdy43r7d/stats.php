@@ -1,0 +1,1 @@
+<?php $stats=array('detection'=>20,'stealth'=>10); ?>
