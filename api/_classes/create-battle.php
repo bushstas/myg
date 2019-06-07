@@ -39,12 +39,33 @@ class BattleCreator {
 			'groups' => self::$groups,
 			'size' => self::$mapSize,
 			'turn' => 0,
-			'heroTurn' => self::$heroTurn
+			'heroTurn' => self::$heroTurn,
+			'terrain' => self::generateTerrain($options)
 		);
 		if (!empty(self::$leaders)) {
 			$data['leaders'] = self::$leaders;
 		}
 		return $data;
+	}
+
+	private function generateTerrain($options) {
+		$terrainImageCount = 1;
+		while (file_exists(__DIR__.'/../../assets/images/terrain/'.$options['terrainId'].'/'.$terrainImageCount.'.png')) {
+			$terrainImageCount++;
+		}
+		$terrain = array();
+		$width = self::$mapSize[1] + 4;
+		$height = self::$mapSize[2] + 4;
+		for ($i = 0; $i < $width; $i++) {
+			for ($j = 0; $j < $height; $j++) {
+				$terrain[] = self::generateTerrainCell($terrainImageCount);	
+			}	
+		}
+		return $terrain;
+	}
+
+	private function generateTerrainCell($terrainImageCount) {
+		return RandomGenerator::generate(1, $terrainImageCount);
 	}
 
 	private static function locateEnemies(&$groups) {
